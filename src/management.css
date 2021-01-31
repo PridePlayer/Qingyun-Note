@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'SourceHanSansCN';
+    src: url("./SourceHanSansCN-Bold.otf") format('opentype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'SourceHanSansCN';
+    src: url("./SourceHanSansCN-Normal.otf") format('opentype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'SourceHanSansCN';
+    src: url("./SourceHanSansCN-Light.otf") format('opentype');
+    font-weight: lighter;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgb(133, 165, 150);
+}
+
+*::-webkit-scrollbar-track {
+    opacity: 0;
+}
+
+body {
+    background-color: RGB(248, 248, 248);
+    font-family: 'SourceHanSansCN';
+    margin-bottom: 0px;
+}
+
+.year {
+    color: rgb(133, 165, 150);
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    clear: both;
+}
+
+.memu-list {
+    width: 247px;
+    background-color: white;
+    border-radius: 14px 14px 14px 14px;
+    box-shadow: 0 0 10rem rgba(0, 0, 0, 0.05) !important;
+    margin-right: 10px;
+    height: max-content;
+    animation: fadeInUp;
+    animation-duration: 1s;
+    cursor: pointer;
+    transition-duration: 0.7s;
+    float: left;
+    margin-left: 10px;
+}

@@ -1,0 +1,195 @@
+@font-face {
+    font-family: 'SourceHanSansCN';
+    src: url("./SourceHanSansCN-Bold.otf") format('opentype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'SourceHanSansCN';
+    src: url("./SourceHanSansCN-Normal.otf") format('opentype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'SourceHanSansCN';
+    src: url("./SourceHanSansCN-Light.otf") format('opentype');
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: 'SourceHanSansCN';
+    src: url("./SourceHanSansCN-Medium.otf") format('opentype');
+    font-weight: medium;
+}
+
+body {
+    background-color: RGB(248, 248, 248);
+    font-family: 'SourceHanSansCN';
+    margin-bottom: 0px;
+}
+
+.text {
+    float: left;
+    border: 0;
+    width: calc(96%);
+    height: calc(80vh - 35px);
+    padding: 10px;
+    margin-left: 20px;
+    resize: none;
+    overflow: auto;
+    word-break: break-all;
+    outline: none;
+    font-family: 'SourceHanSansCN';
+    font-weight: normal;
+    font-size: 15px;
+    word-wrap: break-word;
+}
+
+.memu {
+    float: left;
+    height: calc(98vh);
+    width: 250px;
+    background-color: white;
+    background-color: RGB(248, 248, 248);
+}
+
+.write-main {
+    margin-top: 30px;
+    margin-left: 60px;
+    float: left;
+    width: calc(99% - 300px);
+    height: calc(100vh - 40px);
+    background-color: white;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px rgb(133, 165, 150) solid;
+    border-bottom: 0;
+    box-shadow: 0 10rem 10rem rgba(0, 0, 0, 0.05) !important;
+    animation: fadeInUp;
+    animation-duration: 1s;
+}
+
+.memu-list {
+    width: 247px;
+    background-color: white;
+    border-radius: 14px 14px 14px 14px;
+    box-shadow: 0 0 11rem rgba(0, 0, 0, 0.04) !important;
+    margin-right: 10px;
+    height: max-content;
+    animation: fadeInUp;
+    animation-duration: 1s;
+    cursor: pointer;
+    transition-duration: 0.7s;
+}
+
+.memu-list:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgb(133, 165, 150);
+}
+
+*::-webkit-scrollbar-track {
+    opacity: 0;
+}
+
+.btn-icon {
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+    cursor: pointer;
+}
+
+.write-title {
+    margin-left: 30px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    display: block;
+    color: rgb(127, 127, 127);
+    border: 0;
+    width: calc(97% - 60px);
+    resize: none;
+    word-break: break-all;
+    outline: none;
+    font-family: 'SourceHanSansCN';
+    font-weight: bold;
+    font-size: 25px;
+    word-wrap: break-word;
+}
+
+.btn-new {
+    width: 102px;
+    height: 37px;
+    background-color: white;
+    border-radius: 9px 9px 9px 9px;
+    box-shadow: 0 0 10rem rgba(0, 0, 0, 0.03) !important;
+    color: #85A096;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.btn-new:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.btn-g {
+    cursor: pointer;
+    position: absolute;
+    left: calc(100vh);
+    bottom: 10px;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    font-size: 11px;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px 10px 10px 10px;
+    width: 143px;
+    box-shadow: 0px 3px 17px 0px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content a {
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    text-decoration: none;
+    display: block;
+    font-family: "SourceHanSansCN";
+    font-weight: medium;
+
+}
+
+.dropdown-content a:hover {
+    background-color: rgb(81, 117, 99);
+    color: white;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
