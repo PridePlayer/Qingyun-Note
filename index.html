@@ -1,0 +1,159 @@
+<!--
+    QinYu Note
+    Copyright (c) 2020, Cladonia Studio. (MIT Licensed)
+    Code Written By LiangYin (Main devloper) / PridePlayer
+    Design By Cladonia Members
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>青韵笔记</title>
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/animate.css">
+    <link rel="stylesheet" href="./src/github-markdown.css">
+</head>
+
+<body onkeydown="hotkey(event)">
+    <div class="memu">
+        <div style="margin-left: 25px;margin-top: 20px;width: 100%;height: 40px;">
+            <button class="btn-new btn-icon" onclick="newpage()" style="width: 113px;">
+                <svg style="margin-left: 5px;float: left;margin-top: 3px" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 26 26" width="20" height="20">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(133,160,150,1)" /></svg>
+                <h3 style="font-family: 'SourceHanSansCN';font-weight: normal;float: left;margin: 0;margin-left: 5px;">
+                    新建笔记</h3>
+            </button>
+        </div>
+        <h3 style="margin-top: 30px;margin-left: 26px;color: rgb(133, 165, 150);-webkit-user-select: none;font-family: 'SourceHanSansCN';font-weight: medium;">
+            全部笔记</h3>
+        <div id="memu-list" style="margin-left: 25px;width: 500px;height: calc(80vh);overflow: auto;">
+
+        </div>
+    </div>
+
+
+    <div class="write-main">
+        <input class="write-title" id="title" value="新笔记">
+        <h5 style="margin-left: 30px;margin-top: 0px;margin-bottom: 0px;color: rgb(160,160,160);" id="date">DATE</h4>
+            <hr style="background-color: rgb(133, 165, 150);margin-top: 18px;margin-bottom: 5px;border: 0;height: 1px;">
+            <div style="position: fixed;right: 30px;top: 80px;">
+                <button class="btn-icon" onclick="markdown()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 0 35 35" width="35">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"
+                            fill="rgba(133,160,150,1)" /></svg>
+                </button>
+                <button class="btn-icon" id="save" onclick="save()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 0 35 35" width="35">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z"
+                            fill="rgba(133,160,150,1)" /></svg>
+                </button>
+                <button class="btn-icon" onclick="remove()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 0 35 35" width="35">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z"
+                            fill="rgba(190,0,47,1)" /></svg>
+                </button>
+            </div>
+            <div id="preview" class="markdown-body" style="font-family: 'SourceHanSansCN';font-weight: medium;margin-top: 15px;margin-left: 30px;height: calc(80vh - 26px);overflow: auto;display: none;">
+            </div>
+            <textarea class="text" id="text"></textarea>
+            <div class="btn-g">
+                <div class="dropdown">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="13" height="20" viewBox="0 0 13 20"
+                            style="margin-right: 10px;">
+                            <text id="_" data-name="#" transform="translate(0 18)" fill="#86a697" font-size="20"
+                                font-family="SourceHanSansCN-Heavy, Source Han Sans CN" font-weight="800">
+                                <tspan x="0" y="0">#</tspan>
+                            </text>
+                        </svg></span>
+                    <div class="dropdown-content" style="margin-top: -276px;">
+                        <a style="font-size: 8px; color:#535953">标题</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '# ' + getSelectText('text'));">一级标题</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '## ' + getSelectText('text'));">二级标题</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '#### ' + getSelectText('text'));">三级标题</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '##### ' + getSelectText('text'));">四级标题</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '###### ' + getSelectText('text'));">五级标题</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '####### ' + getSelectText('text'));">六级标题</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <span> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11"
+                            style="margin-right: 10px;margin-bottom: 3px;">
+                            <g id="组_51" data-name="组 51" transform="translate(-0.205)">
+                                <rect id="矩形_20" data-name="矩形 20" width="14" height="2" rx="1"
+                                    transform="translate(0.205)" fill="#86a697" />
+                                <rect id="矩形_21" data-name="矩形 21" width="11" height="2" rx="1"
+                                    transform="translate(1.205 3)" fill="#86a697" />
+                                <rect id="矩形_22" data-name="矩形 22" width="14" height="2" rx="1"
+                                    transform="translate(0.205 6)" fill="#86a697" />
+                                <rect id="矩形_23" data-name="矩形 23" width="11" height="2" rx="1"
+                                    transform="translate(1.205 9)" fill="#86a697" />
+                            </g>
+                        </svg></span>
+                    <div class="dropdown-content" style="margin-top: -95px;">
+                        <a style="font-size: 8px; color:#535953">居中</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '<center>' + getSelectText('text') + '</center>');">居中</a>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" onclick="insertAtCursor(document.getElementById('text'), '- ' + getSelectText('text'));">
+                    <text id="_1." data-name="1." transform="translate(0 18)" fill="#86a697" font-size="20"
+                        font-family="SourceHanSansCN-Bold, Source Han Sans CN" font-weight="700">
+                        <tspan x="0" y="0">-</tspan>
+                    </text>
+                </svg>
+                <div class="dropdown">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="20" viewBox="0 0 14 20"
+                            style="margin-right: 10px;">
+                            <text id="B" transform="translate(0 18)" fill="#86a697" font-size="20"
+                                font-family="SourceHanSansCN-Heavy, Source Han Sans CN" font-weight="800">
+                                <tspan x="0" y="0">B</tspan>
+                            </text>
+                        </svg>
+                    </span>
+                    <div class="dropdown-content" style="margin-top: -200px;">
+                        <a style="font-size: 8px;  color:#535953">样式</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '**' + getSelectText('text') + '**');">粗体</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '*' + getSelectText('text') + '*');">斜体</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '~~' + getSelectText('text') + '~~');">删除线</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '<u>' + getSelectText('text') + '</u>');">下划线</a>
+
+                    </div>
+                </div>
+                <svg id="check_circle-24px" xmlns="http://www.w3.org/2000/svg" width="20.846" height="20.846" viewBox="0 0 20.846 20.846" style="margin-right: 10px;" onclick="insertAtCursor(document.getElementById('text'), '- [ ] ' + getSelectText('text'));">
+                    <path id="路径_29" data-name="路径 29" d="M0,0H20.846V20.846H0Z" fill="none" />
+                    <path id="路径_30" data-name="路径 30"
+                        d="M10.686,2a8.686,8.686,0,1,0,8.686,8.686A8.689,8.689,0,0,0,10.686,2Zm0,15.635a6.949,6.949,0,1,1,6.949-6.949A6.958,6.958,0,0,1,10.686,17.635ZM14.673,6.847,8.949,12.571,6.7,10.33,5.474,11.554l3.474,3.474L15.9,8.08Z"
+                        transform="translate(-0.263 -0.263)" fill="#86a697" />
+                </svg>
+                <div class="dropdown">
+                    <span>
+                        <svg id="movie-24px" xmlns="http://www.w3.org/2000/svg" width="20.846" height="20.846"
+                            viewBox="0 0 24 24">
+                            <path id="路径_31" data-name="路径 31" d="M0,0H24V24H0Z" fill="none" />
+                            <path id="路径_32" data-name="路径 32"
+                                d="M4,6.47,5.76,10H20v8H4V6.47M22,4H18l2,4H17L15,4H13l2,4H12L10,4H8l2,4H7L5,4H4A2,2,0,0,0,2.01,6L2,18a2.006,2.006,0,0,0,2,2H20a2.006,2.006,0,0,0,2-2Z"
+                                fill="#86a697" />
+                        </svg>
+                    </span>
+                    <div class="dropdown-content" style="margin-top: -95px;">
+                        <a style="font-size: 8px; color:#535953">媒体文件</a>
+                        <a onclick="insertAtCursor(document.getElementById('text'), '![](' + getSelectText('text') + ')');">图像</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+<script src="./src/marked.js"></script>
+<script src="./renderer.js"></script>
+
+</html>

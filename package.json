@@ -1,0 +1,15 @@
+{
+    "name": "qinyu",
+    "version": "0.0.1",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build:all": "electron-packager ./ QinYu --electron-version=9.2.1 --platform=win32 --arch=x64 --out=./dist --app-version=0.0.1 --overwhite --icon=./src/icon.ico --asar"
+    },
+    "author": "ZeroX",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^9.2.1"
+    }
+}
